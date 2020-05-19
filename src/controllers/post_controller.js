@@ -9,6 +9,7 @@ export const createPost = (req, res) => {
   post.tags = req.body.tags;
   post.content = req.body.content;
   post.coverUrl = req.body.coverUrl;
+  post.author = req.user.id;
 
   // saving post
   post.save()
@@ -52,6 +53,7 @@ export const deletePost = (req, res) => {
 
 export const updatePost = (req, res) => {
   const fields = req.body;
+
   Post.findByIdAndUpdate(req.params.id, fields, { new: true })
     .then((result) => {
       res.json(result);
